@@ -38,21 +38,23 @@ public class RegularExpression {
         for (int i = 0; i < regex.length(); i++) {
             if (Character.isDigit(regex.charAt(i))) {
                 postfix += regex.charAt(i);
-                
 
             } else if (Character.isAlphabetic(regex.charAt(i))) {
                 postfix += regex.charAt(i);
-                
+
             } else if (regex.charAt(i) == '(') {
                 operands.push(regex.charAt(i));
-                
+
             } else if (regex.charAt(i) == ')') {
                 while ((Character) operands.peek() != '(') {
-                    postfix+=(Character)operands.pop();
+                    postfix += (Character) operands.pop();
 
                 }
                 operands.pop();
-                
+
+            } else if (regex.charAt(i) == ' ') {
+                postfix += regex.charAt(i);
+
             } else {
                 while (!operands.isEmpty()) {
                     character = (Character) operands.peek();
@@ -60,17 +62,18 @@ public class RegularExpression {
                         postfix += (Character) operands.peek();
                         operands.pop();
                     } else {
-                        
+                        break;
                     }
                 }
                 operands.push(regex.charAt(i));
             }
         }
-            while (!operands.empty()) {
-                postfix += (Character) operands.peek();
-                operands.pop();
-            }
-        
+        while (!operands.empty()) {
+            postfix += " ";
+            postfix += (Character) operands.peek();
+            operands.pop();
+        }
+
         return postfix;
 
     }

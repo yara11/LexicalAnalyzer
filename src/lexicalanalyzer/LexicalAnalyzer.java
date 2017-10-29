@@ -5,6 +5,8 @@
  */
 package lexicalanalyzer;
 
+import java.util.Arrays;
+
 /**
  *
  * @author User
@@ -17,8 +19,13 @@ public class LexicalAnalyzer {
     public static void main(String[] args) {
         // TODO code application logic here
         RegularExpression regular = new RegularExpression();
-       String postfix= regular.regex_to_postfix("b|b");
+       String postfix= regular.regex_to_postfix("a|b");
       System.out.println(postfix);
+      NfaCreation n = new NfaCreation();
+     // String []splitted  =n.split_input(postfix);
+      ///System.out.println(Arrays.toString(splitted));
+      n.buildfNfa(postfix);
+      Nfa.printGraph();
     }
     
 }
