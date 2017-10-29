@@ -7,4 +7,15 @@ public class Transition {
         this.nextState = nextState;
         this.symbol = symbol;
     }
+    public Transition(State nextState)
+    {
+        this.nextState = nextState;
+        this.symbol=' ';
+    }
+    public State getState() {
+        return nextState;
+    }
+    public char getSymbol() {
+        return symbol;
+    }
 }
