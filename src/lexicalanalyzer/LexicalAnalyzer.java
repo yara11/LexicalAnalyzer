@@ -17,7 +17,7 @@ public class LexicalAnalyzer {
     public static void main(String[] args) {
         // TODO code application logic here
         RegularExpression regular = new RegularExpression();
-       String postfix= regular.regex_to_postfix("b|b");
+       String postfix= regular.regex_to_postfix("a . b | c *");
       System.out.println(postfix);
     }
     
