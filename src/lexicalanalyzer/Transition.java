@@ -18,4 +18,5 @@ public class Transition {
     public char getSymbol() {
         return symbol;
     }
+    
 }

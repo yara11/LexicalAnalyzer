@@ -21,6 +21,9 @@ public class CombinedNfa {
 
     static void CombineNfa() {
         finalStart = new State(Nfa.last_id++, false);
+        //
+        Nfa.states.add(finalStart);
+        //
         while (!nfas.isEmpty()) {
             Nfa nfa = nfas.pop();
             Nfa.connectStates(finalStart, nfa.getStart(), '~');
