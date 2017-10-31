@@ -35,9 +35,16 @@ public class NfaTable {
             }
         }
     }
+   
 
   static  public void printNfaTable() {
-        constructNfaTable();
+        
+        for(int i=0;i<100;i++){
+            int number= i+'!'; 
+            System.out.print(Character.toChars(number));
+            System.out.print(" ");
+        }
+        System.out.println();
         for (int i = 0; i < no_of_rows; i++) {
             for (int j = 0; j < 100; j++) {
                 System.out.print(nfaTable[i][j] + " ");

@@ -5,9 +5,11 @@ import java.util.ArrayList;
 
 public class Nfa {
     public static ArrayList<ArrayList<Transition>> transitions = new ArrayList();
-    public static int last_id;
+    public static int last_id=0;
     private State start = null, end = null;
-    
+    //list of states
+   static ArrayList<State> states=new ArrayList<State>();
+    //
     public Nfa(State start, State end) {
         this.start = start;
         this.end = end;
@@ -23,7 +25,14 @@ public class Nfa {
      
      public static Nfa AddTransition(char sym) {
         State start = new State(last_id++, false);
+        //
+        
+        states.add(start);
+        //
         State end = new State(last_id++, true);
+        //
+        states.add(end);
+        //
         transitions.get(start.getId()).add(new Transition(end, sym));
         Nfa ret = new Nfa(start, end);
         return ret;

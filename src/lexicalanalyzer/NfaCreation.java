@@ -26,7 +26,8 @@ public class NfaCreation {
 //        return inputArray;
 //
 //    }
-    void buildfNfa(String postfix) {
+    
+    Nfa buildfNfa(String postfix) {
         //String[] inputArray = split_input(postfix);
         for (int i = 0; i < postfix.length(); i++) {
             char input = postfix.charAt(i);
@@ -52,6 +53,9 @@ public class NfaCreation {
                 nfaStack.push(Union(a, b));
             }
         }
+        //a part is added here to get complete nfa
+        Nfa completeNfa = nfaStack.pop();
+        return completeNfa;
     }
 
     // ~ is epsilon
@@ -64,7 +68,13 @@ public class NfaCreation {
      
      public static Nfa Kleene(Nfa a) {
          State new_start = new State(Nfa.last_id++, false);
+         //
+         Nfa.states.add(new_start);
+         //
          State new_end = new State(Nfa.last_id++, true);
+         //
+         Nfa.states.add(new_end);
+         //
          a.getEnd().setIsAccepting(false);
          Nfa.connectStates(new_start, a.getStart(), '~');
          Nfa.connectStates(a.getEnd(), new_end, '~');
@@ -75,7 +85,13 @@ public class NfaCreation {
      }
      public static Nfa Plus(Nfa a) {
          State new_start = new State(Nfa.last_id++, false);
+         //
+         Nfa.states.add(new_start);
+         //
          State new_end = new State(Nfa.last_id++, true);
+         //
+         Nfa.states.add(new_end);
+         //
          a.getEnd().setIsAccepting(false);
          Nfa.connectStates(new_start, a.getStart(), '~');
          Nfa.connectStates(a.getEnd(), new_end, '~');
@@ -85,7 +101,13 @@ public class NfaCreation {
      }
      public static Nfa Union(Nfa a, Nfa b) {
          State new_start = new State(Nfa.last_id++, false);
+         //
+         Nfa.states.add(new_start);
+         //
          State new_end = new State(Nfa.last_id++, true);
+         //
+         Nfa.states.add(new_end);
+         //
          a.getEnd().setIsAccepting(false);
          b.getEnd().setIsAccepting(false);
          Nfa.connectStates(new_start, a.getStart(), '~');
