@@ -26,7 +26,7 @@ public class NfaCreation {
 //        return inputArray;
 //
 //    }
-    void buildfNfa(String postfix) {
+    Nfa buildfNfa(String postfix) {
         //String[] inputArray = split_input(postfix);
         for (int i = 0; i < postfix.length(); i++) {
             char input = postfix.charAt(i);
@@ -52,6 +52,9 @@ public class NfaCreation {
                 nfaStack.push(Union(a, b));
             }
         }
+        //a part is added here to get complete nfa
+        Nfa completeNfa = nfaStack.pop();
+        return completeNfa;
     }
 
     // ~ is epsilon
