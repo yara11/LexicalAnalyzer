@@ -38,7 +38,7 @@ public class NfaTable {
    
 
   static  public void printNfaTable() {
-        constructNfaTable();
+        
         for(int i=0;i<100;i++){
             int number= i+'!'; 
             System.out.print(Character.toChars(number));

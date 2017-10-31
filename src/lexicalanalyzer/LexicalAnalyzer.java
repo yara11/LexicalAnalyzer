@@ -33,7 +33,8 @@ public class LexicalAnalyzer {
        CombinedNfa.nfas.push(nfa2);
       System.out.println(nfa2.getStart().getId());
       Nfa.printGraph();
-      //NfaTable.printNfaTable();
+      NfaTable.constructNfaTable();
+      NfaTable.printNfaTable();
       
      CombinedNfa.CombineNfa();
      System.out.println(CombinedNfa.finalStart.getId());
@@ -44,7 +45,6 @@ public class LexicalAnalyzer {
       }
       Nfa.printGraph();
     System.out.println(Nfa.states.get(2).getNextState('b').getId());
-    NfaTable.printNfaTable();
       //check that states arraylist has all states and that state id is equal to index 
 //      System.out.println(Nfa.states.size());
 //      for(int i=0;i<Nfa.states.size();i++){

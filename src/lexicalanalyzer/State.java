@@ -42,10 +42,11 @@ public class State {
 //      if(nextId==0)
 //          return null;
 //      else{
+System.out.println();
      System.out.println(symbol);
      State nextState=Nfa.states.get(nextId);
      System.out.println(row);
-      System.out.println(column);
+      System.out.println();
      return nextState;}
       
   //  }

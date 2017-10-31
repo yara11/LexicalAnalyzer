@@ -26,6 +26,7 @@ public class NfaCreation {
 //        return inputArray;
 //
 //    }
+    
     Nfa buildfNfa(String postfix) {
         //String[] inputArray = split_input(postfix);
         for (int i = 0; i < postfix.length(); i++) {
