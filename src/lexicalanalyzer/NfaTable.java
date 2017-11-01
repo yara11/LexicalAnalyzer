@@ -22,7 +22,16 @@ public class NfaTable {
 //    }
 
    static void constructNfaTable() {
-        for (int i = 0; i < Nfa.transitions.size(); i++) {
+       
+       
+       for (int i = 0; i < no_of_rows; i++) {
+            for (int j = 0; j < 100; j++) { 
+                nfaTable[i][j] = -1;
+
+            }
+        }
+       
+        for (int i = 0; i < no_of_rows; i++) {
             for (int j = 0; j < Nfa.transitions.get(i).size(); j++) { //Horrible shakl.
                 // fix the many functions.
                 ArrayList<Transition> transitions = Nfa.transitions.get(i);
@@ -41,13 +50,12 @@ public class NfaTable {
         
         for(int i=0;i<100;i++){
             int number= i+'!'; 
-            System.out.print(Character.toChars(number));
-            System.out.print(" ");
+            System.out.print(String.format("%3s %3s ",(char)number," "));
         }
         System.out.println();
         for (int i = 0; i < no_of_rows; i++) {
             for (int j = 0; j < 100; j++) {
-                System.out.print(nfaTable[i][j] + " ");
+                System.out.print(String.format("%3s %3s ",nfaTable[i][j]," "));
             }
             System.out.println();
         }

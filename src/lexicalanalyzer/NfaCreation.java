@@ -13,7 +13,7 @@ import java.util.Stack;
  */
 public class NfaCreation {
 
-    int ID = 0;
+  //  int ID = 0;
     Stack <Nfa> nfaStack = new Stack<Nfa>();
    
     //Split the postfix at each space and insert them into an array of inputs.

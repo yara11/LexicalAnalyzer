@@ -1,55 +1,81 @@
 package lexicalanalyzer;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Set;
 
 public class State {
+
     private int id;
     private boolean isAccepting;
-    private ArrayList<State> closures=new ArrayList<State>();
-    
-    State(int id, boolean isAccepting)
-    {
+    private Set <State> closures = new HashSet<State>();
+    private ArrayList<Character> inputs = new ArrayList<Character>();
+
+    State(int id, boolean isAccepting) {
         this.id = id;
-        this.isAccepting=false;
+        this.isAccepting = false;
         Nfa.AddNfa();
     }
+
     public int getId() {
         return id;
     }
+
     public void setIsAccepting(boolean state) {
         isAccepting = state;
     }
 
-    public ArrayList<State> getClosures() {
+    public Set <State> getClosures() {
         return closures;
     }
 
-    public void setClosures() {
-        ArrayList<Transition> stateTransitions= Nfa.transitions.get(id);
-        char c;
-        for(int i=0;i<stateTransitions.size();i++){
-            c=stateTransitions.get(i).getSymbol();
-            if(c=='~')
-                closures.add(stateTransitions.get(i).getState());
-                
-        }
+   public void setClosures() {
         
+        boolean[] vis = new boolean[Nfa.transitions.size()]; // TODO:
+        Queue<Integer> q = new LinkedList<>();
+        q.add(this.id);
+        vis[this.id] = true;
+        while(!q.isEmpty()) {
+            ArrayList<Transition> stateTransitions = Nfa.transitions.get(q.remove());
+            for(Transition t: stateTransitions) {
+                if(!vis[t.getState().getId()] && t.getSymbol() == '~') {
+                    q.add(t.getState().getId());
+                    this.closures.add(t.getState());
+                    vis[t.getState().getId()] = true;
+                }
+            }
+        }
     }
-    State getNextState(char symbol){
-       int row=this.getId();
-       int column=symbol-'!';
-      int nextId= NfaTable.nfaTable[row][column];
-//      if(nextId==0)
-//          return null;
-//      else{
-System.out.println();
-     System.out.println(symbol);
-     State nextState=Nfa.states.get(nextId);
-     System.out.println(row);
-      System.out.println();
-     return nextState;}
-      
-  //  }
-    
-    
+    void setInputs() {
+        int transitions = Nfa.transitions.get(id).size();
+        for (int i = 0; i < transitions; i++) {
+            char input = Nfa.transitions.get(id).get(i).getSymbol();
+
+            if (input != '~') {
+                inputs.add(input);
+            }
+        }
+
+    }
+
+    ArrayList<Character> getInputs() {
+        return this.inputs;
+    }
+
+    State getNextState(char symbol) {
+        int row = this.getId();
+        int column = symbol - '!';
+        int nextId = NfaTable.nfaTable[row][column];
+      if(nextId==-1)
+          return null;
+      else{
+       
+        State nextState = Nfa.states.get(nextId);
+       
+        return nextState;
+    }
+
+     }
 }
