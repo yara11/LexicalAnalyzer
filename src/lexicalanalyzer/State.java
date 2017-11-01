@@ -10,7 +10,7 @@ public class State {
 
     private int id;
     private boolean isAccepting;
-    private Set <State> closures = new HashSet<State>();
+    private Set<State> closures = new HashSet<State>();
     private ArrayList<Character> inputs = new ArrayList<Character>();
 
     State(int id, boolean isAccepting) {
@@ -27,20 +27,20 @@ public class State {
         isAccepting = state;
     }
 
-    public Set <State> getClosures() {
+    public Set<State> getClosures() {
         return closures;
     }
 
-   public void setClosures() {
-        
+    public void setClosures() {
+
         boolean[] vis = new boolean[Nfa.transitions.size()]; // TODO:
         Queue<Integer> q = new LinkedList<>();
         q.add(this.id);
         vis[this.id] = true;
-        while(!q.isEmpty()) {
+        while (!q.isEmpty()) {
             ArrayList<Transition> stateTransitions = Nfa.transitions.get(q.remove());
-            for(Transition t: stateTransitions) {
-                if(!vis[t.getState().getId()] && t.getSymbol() == '~') {
+            for (Transition t : stateTransitions) {
+                if (!vis[t.getState().getId()] && t.getSymbol() == '~') {
                     q.add(t.getState().getId());
                     this.closures.add(t.getState());
                     vis[t.getState().getId()] = true;
@@ -48,6 +48,7 @@ public class State {
             }
         }
     }
+
     void setInputs() {
         int transitions = Nfa.transitions.get(id).size();
         for (int i = 0; i < transitions; i++) {
@@ -68,14 +69,14 @@ public class State {
         int row = this.getId();
         int column = symbol - '!';
         int nextId = NfaTable.nfaTable[row][column];
-      if(nextId==-1)
-          return null;
-      else{
-       
-        State nextState = Nfa.states.get(nextId);
-       
-        return nextState;
-    }
+        if (nextId == -1) {
+            return null;
+        } else {
 
-     }
+            State nextState = Nfa.states.get(nextId);
+
+            return nextState;
+        }
+
+    }
 }
