@@ -10,7 +10,7 @@ package lexicalanalyzer;
  * @author yomnabarakat
  */
 public class DfaTransition {
-     private CombinedState nextState;
+    private CombinedState nextState;
     private char symbol;
     public DfaTransition(CombinedState nextState, char symbol) {
         this.nextState = nextState;

@@ -7,7 +7,7 @@ public class Nfa {
     public static ArrayList<ArrayList<Transition>> transitions = new ArrayList();
     public static int last_id=0;
     private State start = null, end = null;
-    //list of states
+    //list of ststartates
    static ArrayList<State> states=new ArrayList<State>();
     //
     public Nfa(State start, State end) {

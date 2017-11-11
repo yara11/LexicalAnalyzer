@@ -28,7 +28,7 @@ public class CombinedNfa {
             Nfa nfa = nfas.pop();
             Nfa.connectStates(finalStart, nfa.getStart(), '~');
         }
-
+   //  finalStart.setClosures();
     }
 
 }

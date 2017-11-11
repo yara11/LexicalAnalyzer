@@ -47,6 +47,7 @@ public class State {
                 }
             }
         }
+        this.closures.add(Nfa.states.get(this.id)); // add myself
     }
     void setInputs() {
         int transitions = Nfa.transitions.get(id).size();
