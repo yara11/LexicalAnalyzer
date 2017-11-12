@@ -35,12 +35,20 @@ public class CombinedState {
 
     void setCombinedInputs() {
 
-        Iterator<State> iterator = this.combinedStates.iterator();
-        while (iterator.hasNext()) {
+       // Iterator<State> iterator = this.combinedStates.iterator();
+//       // while (iterator.hasNext()) {
+//           
+//            if(!iterator.next().getInputs().isEmpty())      
+//            {  
+//              //System.out.println("ghadaaaaa");
+//                combinedInputs.addAll(iterator.next().getInputs());
+//            }
+//        }
 
-            iterator.next().setInputs();
-            if(iterator.next().getInputs().size()!=0)
-            combinedInputs.addAll(iterator.next().getInputs());
+ for(State i : combinedStates){
+          
+          this.combinedInputs.addAll(i.getInputs());
+
         }
 
     }
@@ -50,9 +58,13 @@ public class CombinedState {
     }
    //add the closures of each state in the combined state to the combined state to complete the combined state.
     void setCombinedStates() {
-        Iterator<State> iterator = this.combinedStates.iterator();
-        while (iterator.hasNext()) {
-            this.combinedStates.addAll(iterator.next().getClosures());
+       // Iterator<State> iterator = this.combinedStates.iterator();
+       
+       // while (iterator.hasNext()) {
+       
+       for(State i : combinedStates){
+          
+            this.combinedStates.addAll(i.getClosures());
 
         }
 

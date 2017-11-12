@@ -72,6 +72,8 @@ public class State {
         int row = this.getId();
         int column = symbol - '!';
         int nextId = NfaTable.nfaTable[row][column];
+        
+       // System.out.println("I am state " +row +"my column" + "and my next id is "+ nextId);
         if (nextId == -1) {
             return null;
         } else {
