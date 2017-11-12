@@ -1,26 +1,25 @@
 package lexicalanalyzer;
 
-public class Transition {
+public class DfaTransition {
 
-    private State nextState;
+    private CombinedState nextState;
     private char symbol;
 
-    public Transition(State nextState, char symbol) {
+    public DfaTransition(CombinedState nextState, char symbol) {
         this.nextState = nextState;
         this.symbol = symbol;
     }
 
-    public Transition(State nextState) {
+    public DfaTransition(CombinedState nextState) {
         this.nextState = nextState;
         this.symbol = ' ';
     }
 
-    public State getState() {
+    public CombinedState getState() {
         return nextState;
     }
 
     public char getSymbol() {
         return symbol;
     }
-
 }
