@@ -14,24 +14,23 @@ import java.util.Set;
  */
 public class DfaCreation {
    static int combinedId=0;
-   static ArrayList<CombinedState> cList = new ArrayList<CombinedState>();
+   static ArrayList<CombinedState> combinedStateList = new ArrayList<CombinedState>();
    
         
   static void createDfa(State finalStart){
       
-       System.out.println(finalStart.getClosures().size());
+      
        CombinedState dfaStart  = new CombinedState(combinedId++,finalStart.getClosures()); 
        Dfa.AddDfa();
-       cList.add(dfaStart);
-       cList.get(0).setInputs();
+       combinedStateList.add(dfaStart);
+       combinedStateList.get(0).setCombinedInputs();
        
-       for(int i=0;i<cList.size();i++){
+       for(int i=0;i<combinedStateList.size();i++){
            
-         //  System.out.println(cList.get(i).inputs.size());
-             
+        
            
-           CombinedState c1 = cList.get(i);
-           for(char input: c1.inputs){
+           CombinedState c1 = combinedStateList.get(i);
+           for(char input: c1.combinedInputs){
                CombinedState c2  = new CombinedState(combinedId++); 
                /////if mesh mogdaaaa
              //  cList.add(c2);//  Dfa.AddDfa();
@@ -48,8 +47,8 @@ public class DfaCreation {
                        
                        
                   
-                c2.setClosures();
-                c2.setInputs();
+                c2.setCombinedStates();
+                c2.setCombinedInputs();
                 
                 
                 
@@ -57,7 +56,7 @@ public class DfaCreation {
                 
                 
                 if(isExist(c2) == null){ 
-                    cList.add(c2);
+                    combinedStateList.add(c2);
                     Dfa.AddDfa();
                     Dfa.connectCombinedStates(c1 , c2, input);
                    
@@ -86,8 +85,8 @@ public class DfaCreation {
        
        
  static CombinedState isExist(CombinedState c) {
-      for(int i=0;i<cList.size();i++){
-         Set set1 =cList.get(i).combinedStates;
+      for(int i=0;i<combinedStateList.size();i++){
+         Set set1 =combinedStateList.get(i).combinedStates;
          Set set2 =c.combinedStates;
          
          if(set1.size()!= set2.size()){
@@ -95,7 +94,7 @@ public class DfaCreation {
          }
          
          if(set1.containsAll(set2)){
-              return cList.get(i);
+              return combinedStateList.get(i);
          }
         
       }

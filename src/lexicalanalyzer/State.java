@@ -11,7 +11,7 @@ public class State {
     private int id;
     private boolean isAccepting;
     private Set<State> closures = new HashSet<State>();
-    private ArrayList<Character> inputs = new ArrayList<Character>();
+    private Set<Character> inputs = new HashSet<Character>();
 
     State(int id, boolean isAccepting) {
         this.id = id;
@@ -62,9 +62,11 @@ public class State {
 
     }
 
-    ArrayList<Character> getInputs() {
-        return this.inputs;
+    public Set<Character> getInputs() {
+        return inputs;
     }
+
+    
 
     State getNextState(char symbol) {
         int row = this.getId();

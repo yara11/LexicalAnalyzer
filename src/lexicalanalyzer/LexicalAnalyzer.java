@@ -11,9 +11,8 @@ public class LexicalAnalyzer {
 
         // TODO code application logic here
       RegularExpression regular = new RegularExpression();
-      String postfix= regular.regex_to_postfix("a.b*");
+      String postfix= regular.regex_to_postfix("a.b");
       System.out.println(postfix);
-      
       NfaCreation n = new NfaCreation();
      // String []splitted  =n.split_input(postfix);
       ///System.out.println(Arrays.toString(splitted));
@@ -31,19 +30,33 @@ public class LexicalAnalyzer {
       
      CombinedNfa.CombineNfa();
      System.out.println(CombinedNfa.finalStart.getId());
-     CombinedNfa.finalStart.setClosures();
+     // setting inputs and closures for each state in the nfa.
+     for(int i=0;i< Nfa.states.size();i++)
+     {
+         Nfa.states.get(i).setClosures();
+          Nfa.states.get(i).setInputs();
+     }
+     for(int i=0;i<Nfa.states.size();i++)
+     {
+        System.out.println("state closures "+i+" "+ Nfa.states.get(i).getClosures().size());
+          System.out.println("state inputs "+i+" "+ Nfa.states.get(i).getInputs().size());
+     }
      
 //      for(int i=0;i<CombinedNfa.finalStart.getClosures().size();i++){
 //          System.out.println(CombinedNfa.finalStart.getClosures().get(i).getId());
 //      }
+
+      CombinedState dfaStart  = new CombinedState(5555,CombinedNfa.finalStart.getClosures()); 
+      dfaStart.setCombinedInputs();
+      System.out.println(dfaStart.combinedStates.size());
+     
       Nfa.printGraph();
       
-      System.out.println("dfaaaaaaaaaaaaa");
-        Dfa dfa = new Dfa();
-     
-      DfaCreation d= new DfaCreation();
-      d.createDfa(CombinedNfa.finalStart);
-     dfa.printDfaGraph();
+//      System.out.println("dfaaaaaaaaaaaaa");
+//        Dfa dfa = new Dfa();
+//      DfaCreation d= new DfaCreation();
+//      d.createDfa(CombinedNfa.finalStart);
+//     dfa.printDfaGraph();
       
    // System.out.println(Nfa.states.get(2).getNextState('b').getId());
     
