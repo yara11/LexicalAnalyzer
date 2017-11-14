@@ -49,7 +49,7 @@ public class DfaCreation {
                     State nextState = st.getNextState(input);
 
                     if (nextState != null) {
-                        c2.combinedStates.add(st);
+                        c2.combinedStates.add(nextState);
                     }
                     
                 }

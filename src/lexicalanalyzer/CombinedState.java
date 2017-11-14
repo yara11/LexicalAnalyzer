@@ -62,11 +62,18 @@ public class CombinedState {
        
        // while (iterator.hasNext()) {
        
-       for(State i : combinedStates){
+        Set<State> copy = new HashSet<State>();
+        for(State j :combinedStates ){
+           copy.add(j);
+       
+        }
+       for(State i : copy){
           
             this.combinedStates.addAll(i.getClosures());
 
         }
+       
+      
 
     }
 
