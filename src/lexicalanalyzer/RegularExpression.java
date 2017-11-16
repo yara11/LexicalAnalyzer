@@ -3,6 +3,24 @@ package lexicalanalyzer;
 import java.util.Stack;
 
 public class RegularExpression {
+    
+   
+    String insert_concat(String regexp){
+    String ret="";
+    char c,c2;
+    for( int i=0; i<regexp.length(); i++){
+        c=regexp.charAt(i);
+        if(i+1<regexp.length()){
+            c2=regexp.charAt(i+1);
+            ret+=c;
+            if(c!='('&&c2!=')'&&c!='+'&&c2!='+'&&c2!='*'){
+                ret+='.';
+            }
+        }
+    }
+    ret+=regexp.charAt(regexp.length()-1);
+    return ret;
+}
 
     //detecting priorities of operators
     int priority(char c) {

@@ -9,8 +9,10 @@ public class LexicalAnalyzer {
 
     public static void main(String[] args) {
 
-        // TODO code application logic here
+        
       RegularExpression regular = new RegularExpression();
+      String concat = regular.insert_concat("input");
+      System.out.println("This is the concatenated string "+concat);
       String postfix= regular.regex_to_postfix("a.b");
       System.out.println(postfix);
       NfaCreation n = new NfaCreation();
@@ -46,7 +48,8 @@ public class LexicalAnalyzer {
     //  System.out.println("dfaaaaaaaaaaaaa");
      DfaCreation.createDfa(CombinedNfa.finalStart); 
      Dfa.printDfaGraph();
-     
+     DFaTable.constructDfaTable();
+     DFaTable.printDfaTable();
      
        
      

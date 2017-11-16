@@ -81,8 +81,14 @@ public class DfaCreation {
        
 
         }//end of clist  
-
+       createDeadState();
+       
     }//end of dfa   
+    static void createDeadState(){
+        
+        CombinedState deadState= new CombinedState(combinedId++);
+        combinedStateList.add(deadState);
+    }
 
     static CombinedState isExist(CombinedState c) {
         for (int i = 0; i < combinedStateList.size(); i++) {

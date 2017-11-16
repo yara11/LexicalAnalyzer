@@ -22,7 +22,7 @@ public class NfaTable {
 
         for (int i = 0; i < no_of_rows; i++) {
             for (int j = 0; j < Nfa.transitions.get(i).size(); j++) { //Horrible shakl.
-                // fix the many functions.
+                
                 ArrayList<Transition> transitions = Nfa.transitions.get(i);
                 int id = transitions.get(j).getState().getId();
                 int symbol = (transitions.get(j).getSymbol());
