@@ -11,8 +11,8 @@ public class LexicalAnalyzer {
 
         
       RegularExpression regular = new RegularExpression();
-      String concat = regular.insert_concat("input");
-      System.out.println("This is the concatenated string "+concat);
+      String concat = "input";
+      System.out.println("This is the concatenated string "+concat.substring(5).length());
       String postfix= regular.regex_to_postfix("a.b");
       System.out.println(postfix);
       NfaCreation n = new NfaCreation();

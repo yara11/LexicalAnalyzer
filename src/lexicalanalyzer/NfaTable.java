@@ -7,10 +7,7 @@ public class NfaTable {
     static int no_of_rows = Nfa.transitions.size();
     static int nfaTable[][] = new int[no_of_rows][100];
 
-//    NfaTable(int length) {
-//        this.nfaTable = new int[length][100];
-//        this.no_of_rows = length;
-//    }
+ 
     static void constructNfaTable() {
 
         for (int i = 0; i < no_of_rows; i++) {

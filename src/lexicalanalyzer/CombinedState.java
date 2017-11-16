@@ -14,6 +14,9 @@ public class CombinedState {
     boolean isAccepting;
     Set<Character> combinedInputs;
 
+    public CombinedState() {
+    }
+
     public Set<Character> getCombinedInputs() {
         return combinedInputs;
     }
