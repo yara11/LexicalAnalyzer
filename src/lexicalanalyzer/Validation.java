@@ -5,6 +5,7 @@
  */
 package lexicalanalyzer;
 
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Stack;
@@ -16,7 +17,7 @@ import java.util.Stack;
 public class Validation {
 
     static Stack<AcceptingBlocks> stack_blocks = new Stack<AcceptingBlocks>();
-    static Queue<CombinedState> queue_blocks = new PriorityQueue<>();
+    static Queue<CombinedState> queue_blocks = new LinkedList();
     //validation function
     static void validate(String lexeme) {
         int end = 0;
@@ -47,9 +48,11 @@ public class Validation {
             {
                 AcceptingBlocks backTrack= stack_blocks.pop();
                 queue_blocks.add(backTrack.state);
+                end=1;
             }
             else{
                 System.out.println("Wrong");
+                end=1;
             }
         }
     }
