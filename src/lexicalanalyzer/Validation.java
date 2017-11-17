@@ -31,6 +31,8 @@ public class Validation {
             int new_id;
             for (int i = 0; i < new_lexeme.length(); i++) {
                 new_id = DFaTable.dfaTable[old_id][new_lexeme.charAt(i) - '!'];
+                System.out.println(new_id);
+                        
                 newState = DfaCreation.combinedStateList.get(new_id);
                 add_if_Accepting(newState, i);
                 old_id = new_id;

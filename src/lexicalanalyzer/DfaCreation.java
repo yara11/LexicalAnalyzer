@@ -35,7 +35,7 @@ public class DfaCreation {
 //            }
 
             for (char input : c1.combinedInputs) {
-
+               
                 CombinedState c2 = new CombinedState(combinedId++);
 
                 for (State st : c1.combinedStates) {
@@ -66,13 +66,16 @@ public class DfaCreation {
 
         }//end of clist  
         //Dead state inserted.
+        
         createDeadState();
         setAcceptingStates();
+        
     }//end of dfa   
 
     static void createDeadState() {
+       
 
-        CombinedState deadState = new CombinedState(combinedId++);
+        CombinedState deadState = new CombinedState(--combinedId);
         combinedStateList.add(deadState);
     }
 
