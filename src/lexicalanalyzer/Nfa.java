@@ -22,13 +22,14 @@ public class Nfa {
         transitions.add(t);
     }
 
-    public static Nfa AddTransition(char sym) {
+    public static Nfa AddTransition(char sym,String expression) {
         State start = new State(last_id++, false);
         //
 
         states.add(start);
         //
         State end = new State(last_id++, true);
+        end.setPattern(expression);
         //
         states.add(end);
         //
@@ -52,7 +53,10 @@ public class Nfa {
     public static void printGraph() {
         for (int i = 0; i < transitions.size(); i++) {
             for (Transition t : transitions.get(i)) {
+                
                 System.out.println("(" + i + " -> " + t.getState().getId() + ", " + t.getSymbol() + ")");
+                     System.out.println(t.getState().isIsAccepting());
+                     System.out.println(t.getState().getPattern());
             }
         }
     }

@@ -1,6 +1,7 @@
 package lexicalanalyzer;
 
 import java.util.ArrayList;
+import static lexicalanalyzer.DfaCreation.combinedStateList;
 import static lexicalanalyzer.Nfa.transitions;
 
 public class Dfa {
@@ -22,7 +23,12 @@ public class Dfa {
          System.out.println(transitions.size());
          for(int i = 0; i < transitions.size(); i++) {
              for(DfaTransition t: transitions.get(i)) {
+                
                  System.out.println("(" + i + " -> " + t.getState().getId() + ", " + t.getSymbol() + ")");
+                 System.out.println(t.getState().isAccepting );
+                 for(int k=0;k<t.getState().pattern.size();k++){
+                     System.out.println(t.getState().pattern.get(k));
+                 }
              }
          }
      }

@@ -23,22 +23,20 @@ public class DfaCreation {
         Dfa.AddDfa();
         combinedStateList.add(dfaStart);
         combinedStateList.get(0).setCombinedInputs();
-        // System.out.println( "my size is "+ combinedStateList.get(0).combinedInputs.size());
         for (int i = 0; i < combinedStateList.size(); i++) {
 
             CombinedState c1 = combinedStateList.get(i);
 
-            System.out.println("sizeinputssss" + c1.combinedInputs.size());
-            for (char c : c1.combinedInputs) {
-
-                System.out.println("myid" + c1.id + "inputs" + c);
-
-            }
+           
+//            for (char c : c1.combinedInputs) {
+//
+//                System.out.println("myid" + c1.id + "inputs" + c);
+//
+//            }
 
             for (char input : c1.combinedInputs) {
 
                 CombinedState c2 = new CombinedState(combinedId++);
-                
 
                 for (State st : c1.combinedStates) {
                     State nextState = st.getNextState(input);
@@ -60,7 +58,6 @@ public class DfaCreation {
 
                 } else {
 
-                    System.out.println("tekrar");
                     Dfa.connectCombinedStates(c1, isExist(c2), input);
 
                 }
@@ -70,14 +67,8 @@ public class DfaCreation {
         }//end of clist  
         //Dead state inserted.
         createDeadState();
-
+        setAcceptingStates();
     }//end of dfa   
-
-    static void setAcceptingStates() {
-        for (int i = 0; i < combinedStateList.size(); i++) {
-            
-        }
-    }
 
     static void createDeadState() {
 
@@ -85,14 +76,25 @@ public class DfaCreation {
         combinedStateList.add(deadState);
     }
 
+    //set accepting states in the dfa
+    static void setAcceptingStates() {
+        for (int i = 0; i < combinedStateList.size(); i++) {
+            CombinedState state = combinedStateList.get(i);
+            for (State st : state.combinedStates) {
+                if (st.isIsAccepting()) {
+                    state.isAccepting = true;
+                    state.pattern.add(st.getPattern());
+                }
+            }
+        }
+    }
+
     static CombinedState isExist(CombinedState c) {
         for (int i = 0; i < combinedStateList.size(); i++) {
             Set set1 = combinedStateList.get(i).combinedStates;
             Set set2 = c.combinedStates;
 
-       
             if (set1.equals(set2)) {
-                //System.out.println("dinaaa"+combinedStateList.size());
                 return combinedStateList.get(i);
             }
 

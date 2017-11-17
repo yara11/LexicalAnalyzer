@@ -10,17 +10,31 @@ public class State {
 
     private int id;
     private boolean isAccepting;
+    private String pattern;
     private Set<State> closures = new HashSet<State>();
     private Set<Character> inputs = new HashSet<Character>();
 
+    public void setPattern(String pattern) {
+        this.pattern = pattern;
+    }
+
+    public String getPattern() {
+        return pattern;
+    }
+
     State(int id, boolean isAccepting) {
         this.id = id;
-        this.isAccepting = false;
+        //17-11  false to is accepting
+        this.isAccepting = isAccepting;
         Nfa.AddNfa();
     }
 
     public int getId() {
         return id;
+    }
+
+    public boolean isIsAccepting() {
+        return isAccepting;
     }
 
     public void setIsAccepting(boolean state) {

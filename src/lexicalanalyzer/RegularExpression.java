@@ -13,12 +13,13 @@ public class RegularExpression {
         if(i+1<regexp.length()){
             c2=regexp.charAt(i+1);
             ret+=c;
-            if(c!='('&&c2!=')'&&c!='+'&&c2!='+'&&c2!='*'){
+            if(c!='('&&c2!=')'&&c!='+'&&c2!='+'&&c2!='*' &&c!='|' &&c2!='|'){
                 ret+='.';
             }
         }
     }
     ret+=regexp.charAt(regexp.length()-1);
+          
     return ret;
 }
 

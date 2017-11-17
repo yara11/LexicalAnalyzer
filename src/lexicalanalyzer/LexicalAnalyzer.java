@@ -11,21 +11,24 @@ public class LexicalAnalyzer {
 
         
       RegularExpression regular = new RegularExpression();
-      String concat = "input";
-      System.out.println("This is the concatenated string "+concat.substring(5).length());
-      String postfix= regular.regex_to_postfix("a.b");
+      //String concat = "input";
+      //System.out.println("This is the concatenated string "+concat.substring(5).length());
+      String expression="a.b";
+      String postfix= regular.regex_to_postfix(expression);
       System.out.println(postfix);
       NfaCreation n = new NfaCreation();
      // String []splitted  =n.split_input(postfix);
       ///System.out.println(Arrays.toString(splitted));
-      Nfa nfa1=n.buildfNfa(postfix);
+      Nfa nfa1=n.buildfNfa(postfix,expression);
       CombinedNfa.nfas.push(nfa1);
       System.out.println(nfa1.getStart().getId());
       Nfa.printGraph();
       System.out.println();
-      Nfa nfa2 =n.buildfNfa("ab|");
+      String expression2="b*";
+      Nfa nfa2 =n.buildfNfa("b*",expression2);
       CombinedNfa.nfas.push(nfa2);
       System.out.println(nfa2.getStart().getId());
+      System.out.println("THis is our NFA");
       Nfa.printGraph();
       
       
@@ -37,11 +40,11 @@ public class LexicalAnalyzer {
          Nfa.states.get(i).setClosures();
           Nfa.states.get(i).setInputs();
      }
-     for(int i=0;i<Nfa.states.size();i++)
-     {
-          System.out.println("state closures "+i+" "+ Nfa.states.get(i).getClosures().size());
-          System.out.println("state inputs "+i+" "+ Nfa.states.get(i).getInputs().size());
-     }
+//     for(int i=0;i<Nfa.states.size();i++)
+//     {
+//          System.out.println("state closures "+i+" "+ Nfa.states.get(i).getClosures().size());
+//          System.out.println("state inputs "+i+" "+ Nfa.states.get(i).getInputs().size());
+//     }
      
      NfaTable.constructNfaTable();
       NfaTable.printNfaTable();
@@ -54,40 +57,7 @@ public class LexicalAnalyzer {
        
      
 
-//
-//     State st1 = new State(9,true);
-//     State st2 = new State(10,true);
-//     State st3 = new State(11,true);
-//     State st4 = new State(12,true);
-//     State st5 = new State(13,true);
-//      
-//     Set<State> set1= new HashSet<State>();
-//     Set<State> set2= new HashSet<State>();
-//     Iterator<State> iterator3 = set2.iterator();
-//      set1.add(st1);
-//      set1.add(st2);
-//      
-//      set2.add(st1);
-//      set2.add(st2);
-//     // System.out.println("equaaaalls");
-//      
-//      if(set1.equals(set2)){
-//          System.out.println("equaaaalls");
-//      }
-//      
-//     
-////        while (iterator3.hasNext()) {
-////      System.out.println("dinaaaaaa");
-////      set1.add(iterator3.next()); 
-////     
-////        }
-////     
-////    for(State i: set2){
-////     
-////     set1.add(i); 
-////     
-////     
-////        }
+
    
   
      
