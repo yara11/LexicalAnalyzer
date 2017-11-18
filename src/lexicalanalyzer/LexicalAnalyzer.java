@@ -53,14 +53,9 @@ public class LexicalAnalyzer {
      Dfa.printDfaGraph();
      DFaTable.constructDfaTable();
      DFaTable.printDfaTable();
-     Validation.validate("ab");
-     System.out.println("This is the resut pattern "+Validation.queue_blocks.peek().pattern.get(0));
-       for(int l=0;l<DfaCreation.combinedStateList.size();l++)
-       {
-       
-       System.out.print("c.l.id"+DfaCreation.combinedStateList.get(l).id);
-       
-       }
+     Validation.validate("a");
+    // System.out.println("This is the resut pattern "+Validation.queue_blocks.peek().pattern.get(0));
+       readRE.printReadFile();
 
 
    
