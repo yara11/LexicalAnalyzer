@@ -56,8 +56,16 @@ public class readRE {
                     arrKeywords = line.split(" ");
 
                     for (int g = 0; g < arrKeywords.length; g++) {
-                        RE.put(arrKeywords[g], arrKeywords[g]);
-
+                        if(arrKeywords[g].charAt(0)=='\\')
+                          
+                       // RE.put(arrKeywords[g], arrKeywords[g]);
+ RE.put( arrKeywords[g].replace("\\",""),  arrKeywords[g].replace("\\",""));
+                        
+                        else {
+                            
+                            RE.put( arrKeywords[g],  arrKeywords[g]);
+                        }
+                        
                     }
 
                 }//end of punc

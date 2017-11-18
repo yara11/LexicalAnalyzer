@@ -56,6 +56,7 @@ public class LexicalAnalyzer {
      Validation.validate("a");
     // System.out.println("This is the resut pattern "+Validation.queue_blocks.peek().pattern.get(0));
        readRE.printReadFile();
+       NfaInput.nfaInput();
 
 
    
