@@ -59,7 +59,7 @@ public class DfaCreation {
                 } else {
 
                     Dfa.connectCombinedStates(c1, isExist(c2), input);
-
+                      combinedId--;
                 }
 
             }//end of inputs 
@@ -75,7 +75,7 @@ public class DfaCreation {
     static void createDeadState() {
        
 
-        CombinedState deadState = new CombinedState(--combinedId);
+        CombinedState deadState = new CombinedState(combinedId);
         combinedStateList.add(deadState);
     }
 
