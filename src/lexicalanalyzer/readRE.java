@@ -10,7 +10,7 @@ public class readRE {
 
     public static HashMap<String, String> RE = new HashMap<>();
     public static HashMap<String, String> RD = new HashMap<>();
-    public static String all = "a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|u|x|y|z|A|B|C|D|E|F|G|H|I|J|K||L|M|N|O|B|K|R|S|T|Y|V|W|X|Y|Z|0|1|2|3|4|5|6|7|8|9";
+    public static String all = "a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|u|x|y|z|A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|B|K|R|S|T|Y|V|W|X|Y|Z|0|1|2|3|4|5|6|7|8|9";
 
     public static void read() {
         String fileName = "input.txt";
