@@ -116,8 +116,9 @@ public class NfaCreation {
         if (Character.isDigit(c)) {
             return true;
         }
+        if(c=='<'||c=='>'||c=='='||c=='!'||c=='{'||c=='}'||c==';'||c==','||c=='('||c==')'||c=='/'||c=='-')
+            return true;
         return false;
 
     }
-
 }

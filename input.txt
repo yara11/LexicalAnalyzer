@@ -4,3 +4,7 @@ id: letter (letter|digit)*
 digits = digit+
 {boolean int float}
 num: digit+
+assign: =
+{if else while }
+addop:  -
+mulop:  /
