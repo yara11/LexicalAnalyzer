@@ -51,7 +51,7 @@ public class LexicalAnalyzer {
      Dfa.printDfaGraph();
      DFaTable.constructDfaTable();
     // DFaTable.printDfaTable();
-     Validation.validate("=");
+     Validation.validate(";");
      System.out.println("This is the resut pattern "+Validation.queue_blocks.peek().pattern.get(0));
        
       

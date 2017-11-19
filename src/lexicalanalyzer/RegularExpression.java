@@ -45,14 +45,21 @@ public class RegularExpression {
         String postfix = "";
         Stack operands = new Stack();
         char character;
+        
         for (int i = 0; i < regex.length(); i++) {
+            char c=regex.charAt(i);
             if (Character.isDigit(regex.charAt(i))) {
                 postfix += regex.charAt(i);
 
             } else if (Character.isAlphabetic(regex.charAt(i))) {
                 postfix += regex.charAt(i);
 
-            } else if (regex.charAt(i) == '(') {
+            } else if ((c=='<'||c=='>'||c=='='||c=='!'||c=='{'||c=='}'||c==';'||c==','||c=='/'||c=='-')) {
+                postfix += regex.charAt(i);
+
+            } 
+            
+            else if (regex.charAt(i) == '(') {
                 operands.push(regex.charAt(i));
 
             } else if (regex.charAt(i) == ')') {
