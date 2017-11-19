@@ -21,21 +21,23 @@ public class NfaCreation {
         for (int i = 0; i < postfix.length(); i++) {
             char input = postfix.charAt(i);
             if (isInput(input)) {
-                nfaStack.push(Nfa.AddTransition(input,expression));
-            } else if (input == '.') {
+                nfaStack.push(Nfa.AddTransition(input, expression));
+            } 
+              
+            else if (input == '.') {
                 Nfa b = nfaStack.pop();
                 Nfa a = nfaStack.pop();
-                nfaStack.push(Concat(a, b,expression));
+                nfaStack.push(Concat(a, b, expression));
             } else if (input == '*') {
                 Nfa top = nfaStack.pop();
-                nfaStack.push(Kleene(top,expression));
+                nfaStack.push(Kleene(top, expression));
             } else if (input == '+') {
                 Nfa top = nfaStack.pop();
-                nfaStack.push(Plus(top,expression));
+                nfaStack.push(Plus(top, expression));
             } else if (input == '|') {
                 Nfa b = nfaStack.pop();
                 Nfa a = nfaStack.pop();
-                nfaStack.push(Union(a, b,expression));
+                nfaStack.push(Union(a, b, expression));
             }
         }
         //a part is added here to get complete nfa
@@ -70,7 +72,7 @@ public class NfaCreation {
         return ret;
     }
 
-    public static Nfa Plus(Nfa a,String expression) {
+    public static Nfa Plus(Nfa a, String expression) {
         State new_start = new State(Nfa.last_id++, false);
         //
         Nfa.states.add(new_start);
@@ -83,12 +85,12 @@ public class NfaCreation {
         a.getEnd().setIsAccepting(false);
         Nfa.connectStates(new_start, a.getStart(), '~');
         Nfa.connectStates(a.getEnd(), new_end, '~');
-        Nfa.connectStates(new_start, new_end, '~');
+        Nfa.connectStates( new_end,new_start, '~');
         Nfa ret = new Nfa(new_start, new_end);
         return ret;
     }
 
-    public static Nfa Union(Nfa a, Nfa b,String expression) {
+    public static Nfa Union(Nfa a, Nfa b, String expression) {
         State new_start = new State(Nfa.last_id++, false);
         //
         Nfa.states.add(new_start);
