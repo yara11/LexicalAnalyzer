@@ -13,7 +13,7 @@ public class LexicalAnalyzer {
       RegularExpression regular = new RegularExpression();
       //String concat = "input";
       //System.out.println("This is the concatenated string "+concat.substring(5).length());
-      String expression="a.b";
+      String expression="b*";
       String postfix= regular.regex_to_postfix(expression);
       System.out.println(postfix);
       NfaCreation n = new NfaCreation();
@@ -24,8 +24,8 @@ public class LexicalAnalyzer {
       System.out.println(nfa1.getStart().getId());
       Nfa.printGraph();
       System.out.println();
-      String expression2="b*";
-      Nfa nfa2 =n.buildfNfa("b*",expression2);
+      String expression2="ab.";
+      Nfa nfa2 =n.buildfNfa("ab.",expression2);
       CombinedNfa.nfas.push(nfa2);
       System.out.println(nfa2.getStart().getId());
       System.out.println("THis is our NFA");
