@@ -9,6 +9,7 @@ public class LexicalAnalyzer {
 
     public static void main(String[] args) {
 
+      
       readRE.printReadFile(); 
        NfaInput.nfaInput();
       RegularExpression regular = new RegularExpression();
@@ -51,7 +52,7 @@ public class LexicalAnalyzer {
      Dfa.printDfaGraph();
      DFaTable.constructDfaTable();
     // DFaTable.printDfaTable();
-     Validation.validate(";");
+     Validation.validate("ghjklkl");
      System.out.println("This is the resut pattern "+Validation.queue_blocks.peek().pattern.get(0));
        
       

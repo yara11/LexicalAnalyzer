@@ -17,33 +17,39 @@ public class NfaCreation {
 //
 //    }
     Nfa buildfNfa(String postfix, String expression) {
-        //String[] inputArray = split_input(postfix);
+
         for (int i = 0; i < postfix.length(); i++) {
             char input = postfix.charAt(i);
             if (isInput(input)) {
-                nfaStack.push(Nfa.AddTransition(input,expression));
+                nfaStack.push(Nfa.AddTransition(input, expression));
+            } else if (input == '*' || input == '+') {
+                if (i == 0) {
+                    nfaStack.push(Nfa.AddTransition(input, expression));
+                } else if (postfix.charAt(i + 1) == ' ') {
+                    nfaStack.push(Nfa.AddTransition(input, expression));
+                }
             } else if (input == '.') {
                 Nfa b = nfaStack.pop();
                 Nfa a = nfaStack.pop();
-                nfaStack.push(Concat(a, b,expression));
+                nfaStack.push(Concat(a, b, expression));
             } else if (input == '*') {
                 Nfa top = nfaStack.pop();
-                nfaStack.push(Kleene(top,expression));
+                nfaStack.push(Kleene(top, expression));
             } else if (input == '+') {
                 Nfa top = nfaStack.pop();
-                nfaStack.push(Plus(top,expression));
+                nfaStack.push(Plus(top, expression));
             } else if (input == '|') {
                 Nfa b = nfaStack.pop();
                 Nfa a = nfaStack.pop();
-                nfaStack.push(Union(a, b,expression));
+                nfaStack.push(Union(a, b, expression));
             }
         }
         //a part is added here to get complete nfa
         Nfa completeNfa = nfaStack.pop();
         return completeNfa;
     }
-
     // ~ is epsilon
+
     public static Nfa Concat(Nfa a, Nfa b, String expression) {
         Nfa.connectStates(a.getEnd(), b.getStart(), '~');
         a.getEnd().setIsAccepting(false);
@@ -70,7 +76,7 @@ public class NfaCreation {
         return ret;
     }
 
-    public static Nfa Plus(Nfa a,String expression) {
+    public static Nfa Plus(Nfa a, String expression) {
         State new_start = new State(Nfa.last_id++, false);
         //
         Nfa.states.add(new_start);
@@ -88,7 +94,7 @@ public class NfaCreation {
         return ret;
     }
 
-    public static Nfa Union(Nfa a, Nfa b,String expression) {
+    public static Nfa Union(Nfa a, Nfa b, String expression) {
         State new_start = new State(Nfa.last_id++, false);
         //
         Nfa.states.add(new_start);
@@ -116,8 +122,9 @@ public class NfaCreation {
         if (Character.isDigit(c)) {
             return true;
         }
-        if(c=='<'||c=='>'||c=='='||c=='!'||c=='{'||c=='}'||c==59||c==44||c=='('||c==')'||c=='/'||c=='-')
+        if (c == '<' || c == '>' || c == '=' || c == '!' || c == '{' || c == '}' || c == 59 || c == 44 || c == '(' || c == ')' || c == '/' || c == '-') {
             return true;
+        }
         return false;
 
     }

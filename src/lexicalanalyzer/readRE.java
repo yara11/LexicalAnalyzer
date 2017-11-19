@@ -23,14 +23,12 @@ public class readRE {
             String[] split = new String[50];
 
             while ((line = bufferedReader.readLine()) != null) {
-                
-                 //Keywords
+
+                //Keywords
                 if (line.charAt(0) == '{') {
 
-                   
-                        line=line.replace("{","");
-                        line=line.replace("}","");
-                    
+                    line = line.replace("{", "");
+                    line = line.replace("}", "");
 
                     String[] arrKeywords;
 
@@ -42,86 +40,71 @@ public class readRE {
                     }
 
                 }//end of Keywords
-                
                 //punc
-               else if (line.charAt(0) == '[') {
+                else if (line.charAt(0) == '[') {
 
-                   
-                        line=line.replace("[","");
-                        line=line.replace("]","");
-                    
+                    line = line.replace("[", "");
+                    line = line.replace("]", "");
 
                     String[] arrKeywords;
 
                     arrKeywords = line.split(" ");
 
                     for (int g = 0; g < arrKeywords.length; g++) {
-                        if(arrKeywords[g].charAt(0)=='\\')
-                          
-                       // RE.put(arrKeywords[g], arrKeywords[g]);
- RE.put( arrKeywords[g].replace("\\",""),  arrKeywords[g].replace("\\",""));
-                        
-                        else {
-                            
-                            RE.put( arrKeywords[g],  arrKeywords[g]);
+                        if (arrKeywords[g].charAt(0) == '\\') {
+                            RE.put(arrKeywords[g].replace("\\", ""), arrKeywords[g].replace("\\", ""));
+                        } else {
+
+                            RE.put(arrKeywords[g], arrKeywords[g]);
                         }
-                        
+
                     }
 
                 }//end of punc
-                
-          else {         
-                //line without space
-                String linews = line.trim().replaceAll(" ", "");
+                else {
+                    //line without space
+                    String linews = line.trim().replaceAll(" ", "");
 
-                // regular definitions
-                int equal = -1;
-                if (linews.contains("=")) {
+                    // regular definitions
+                    int equal = -1;
+                    if (linews.contains("=")) {
 
-                    for (int i = 0; i < linews.length(); i++) {
-                        if (linews.charAt(i) == '=') {
-                            equal = i;
-                        }
-                    }
-
-                    if (linews.charAt(equal - 1) != '\\' && linews.charAt(equal - 1) != ':') {
-                        split = linews.split("=");
-
-                        if (!split[1].equals(" ")) {
-                            RD.put(split[0], split[1]);
+                        for (int i = 0; i < linews.length(); i++) {
+                            if (linews.charAt(i) == '=') {
+                                equal = i;
+                            }
                         }
 
-                    }
+                        if (linews.charAt(equal - 1) != '\\' && linews.charAt(equal - 1) != ':') {
+                            split = linews.split("=");
 
-                }//end of definitions
+                            if (!split[1].equals(" ")) {
+                                RD.put(split[0], split[1]);
+                            }
 
-                // regular expression
-                int colon = -1;
-                if (linews.contains(":")) {
-
-                    for (int i = 0; i < linews.length(); i++) {
-                        if (linews.charAt(i) == ':') {
-                            colon = i;
                         }
-                    }
 
-                    if (linews.charAt(colon - 1) != '\\') {
-                        split = linews.split(":");
-                        RE.put(split[0], split[1]);
+                    }//end of definitions
 
-                    }
+                    // regular expression
+                    int colon = -1;
+                    if (linews.contains(":")) {
 
-                }//end of experssions
-                
-               
+                        for (int i = 0; i < linews.length(); i++) {
+                            if (linews.charAt(i) == ':') {
+                                colon = i;
+                            }
+                        }
 
-                
-                
-                
-                   
-                
-                }   
-               
+                        if (linews.charAt(colon - 1) != '\\') {
+                            split = linews.split(":");
+                            RE.put(split[0], split[1]);
+
+                        }
+
+                    }//end of experssions
+
+                }
 
             }//end of while 
 
@@ -206,7 +189,6 @@ public class readRE {
 //            System.out.println("key: " + key + "  and value: " + RE.get(key));
 //
 //        }
-
     }
 
 }

@@ -3,25 +3,24 @@ package lexicalanalyzer;
 import java.util.Stack;
 
 public class RegularExpression {
-    
-   
-    String insert_concat(String regexp){
-    String ret="";
-    char c,c2;
-    for( int i=0; i<regexp.length(); i++){
-        c=regexp.charAt(i);
-        if(i+1<regexp.length()){
-            c2=regexp.charAt(i+1);
-            ret+=c;
-            if(c!='('&&c2!=')'&&c!='+'&&c2!='+'&&c2!='*' &&c!='|' &&c2!='|'){
-                ret+='.';
+
+    String insert_concat(String regexp) {
+        String ret = "";
+        char c, c2;
+        for (int i = 0; i < regexp.length(); i++) {
+            c = regexp.charAt(i);
+            if (i + 1 < regexp.length()) {
+                c2 = regexp.charAt(i + 1);
+                ret += c;
+                if (c != '(' && c2 != ')' && c != '+' && c2 != '+' && c2 != '*' && c != '|' && c2 != '|') {
+                    ret += '.';
+                }
             }
         }
+        ret += regexp.charAt(regexp.length() - 1);
+
+        return ret;
     }
-    ret+=regexp.charAt(regexp.length()-1);
-          
-    return ret;
-}
 
     //detecting priorities of operators
     int priority(char c) {
@@ -45,21 +44,31 @@ public class RegularExpression {
         String postfix = "";
         Stack operands = new Stack();
         char character;
-        
+
         for (int i = 0; i < regex.length(); i++) {
-            char c=regex.charAt(i);
+            char c = regex.charAt(i);
             if (Character.isDigit(regex.charAt(i))) {
                 postfix += regex.charAt(i);
 
             } else if (Character.isAlphabetic(regex.charAt(i))) {
                 postfix += regex.charAt(i);
 
-            } else if ((c=='<'||c=='>'||c=='='||c=='!'||c=='{'||c=='}'||c==';'||c==','||c=='/'||c=='-')) {
+            } else if ((c == '<' || c == '>' || c == '=' || c == '!' || c == '{' || c == '}' || c == ';' || c == ',' || c == '/' || c == '-')) {
                 postfix += regex.charAt(i);
 
-            } 
-            
-            else if (regex.charAt(i) == '(') {
+            } else if (c == '*') {
+                if (i == 0) {
+                    postfix += regex.charAt(i);
+                } else if (regex.charAt(i - 1) == '|') {
+                    postfix += regex.charAt(i);
+                }
+            } else if (c == '+') {
+                if (i == 0) {
+                    postfix += regex.charAt(i);
+                } else if (regex.charAt(i - 1) == '|') {
+                    postfix += regex.charAt(i);
+                }
+            } else if (regex.charAt(i) == '(') {
                 operands.push(regex.charAt(i));
 
             } else if (regex.charAt(i) == ')') {
