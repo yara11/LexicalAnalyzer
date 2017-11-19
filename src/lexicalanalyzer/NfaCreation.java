@@ -85,9 +85,7 @@ public class NfaCreation {
         a.getEnd().setIsAccepting(false);
         Nfa.connectStates(new_start, a.getStart(), '~');
         Nfa.connectStates(a.getEnd(), new_end, '~');
-
-        Nfa.connectStates(new_end, new_start, '~');
-
+        Nfa.connectStates( new_end,new_start, '~');
         Nfa ret = new Nfa(new_start, new_end);
         return ret;
     }
