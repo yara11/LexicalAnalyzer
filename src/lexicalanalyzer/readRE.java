@@ -197,15 +197,17 @@ public class readRE {
 
         read();
 
-        System.out.println("definitions");
-        for (String key : RD.keySet()) {
-            System.out.println("key: " + key + " and value: " + RD.get(key));
-        }
-        System.out.println("experssions");
-        for (String key : RE.keySet()) {
-            System.out.println("key: " + key + "  and value: " + RE.get(key));
 
-        }
+//        System.out.println("definitions");
+//        for (String key : RD.keySet()) {
+//            System.out.println("key: " + key + " and value: " + RD.get(key));
+//        }
+//        System.out.println("experssions");
+//        for (String key : RE.keySet()) {
+//            System.out.println("key: " + key + "  and value: " + RE.get(key));
+//
+//        }
+
 
     }
 
