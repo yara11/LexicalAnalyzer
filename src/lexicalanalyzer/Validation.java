@@ -66,5 +66,15 @@ public class Validation {
         }
 
     }
-
+    static String getPriority(){
+         int priority1=readRE.priority.get(queue_blocks.peek().pattern.get(0));
+         int priority2;
+         int index=0;
+        for(int i=0;i<queue_blocks.peek().pattern.size();i++){
+        priority2=readRE.priority.get(queue_blocks.peek().pattern.get(i));
+       if(priority1>priority2)
+       index=i; 
+    }
+        return queue_blocks.peek().pattern.get(index);
+    }
 }

@@ -14,7 +14,11 @@ public class LexicalAnalyzer {
        NfaInput.nfaInput();
       RegularExpression regular = new RegularExpression();
        NfaCreation n = new NfaCreation();
-      
+       System.out.println("priorityyyyyyy");
+       for (String key : readRE.priority.keySet()) {
+            System.out.println("key: " + key + "  and value: " + readRE.priority.get(key));
+
+       }
       for(String Key:readRE.RE.keySet()){
           String expression = readRE.RE.get(Key);
           System.out.println("exp of : "+ Key +" is  "+ expression );
@@ -51,9 +55,10 @@ public class LexicalAnalyzer {
      System.out.println("\nThis is the DFA:\n");
      Dfa.printDfaGraph();
      DFaTable.constructDfaTable();
-    // DFaTable.printDfaTable();
-     Validation.validate("ghjklkl");
-     System.out.println("This is the resut pattern "+Validation.queue_blocks.peek().pattern.get(0));
+     //DFaTable.printDfaTable();
+    Validation.validate("if");
+     
+      System.out.println("This is the resut pattern "+Validation.getPriority());
        
       
 

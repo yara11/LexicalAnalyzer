@@ -42,6 +42,7 @@ public class RegularExpression {
     //converting form infix to postfix
     String regex_to_postfix(String regex) {
         String postfix = "";
+        int flag=0;
         Stack operands = new Stack();
         char character;
 
@@ -56,19 +57,7 @@ public class RegularExpression {
             } else if ((c == '<' || c == '>' || c == '=' || c == '!' || c == '{' || c == '}' || c == ';' || c == ',' || c == '/' || c == '-')) {
                 postfix += regex.charAt(i);
 
-            } else if (c == '*') {
-                if (i == 0) {
-                    postfix += regex.charAt(i);
-                } else if (regex.charAt(i - 1) == '|') {
-                    postfix += regex.charAt(i);
-                }
-            } else if (c == '+') {
-                if (i == 0) {
-                    postfix += regex.charAt(i);
-                } else if (regex.charAt(i - 1) == '|') {
-                    postfix += regex.charAt(i);
-                }
-            } else if (regex.charAt(i) == '(') {
+            }  else if (regex.charAt(i) == '(') {
                 operands.push(regex.charAt(i));
 
             } else if (regex.charAt(i) == ')') {
@@ -82,7 +71,24 @@ public class RegularExpression {
                 postfix += regex.charAt(i);
 
             } else {
-                while (!operands.isEmpty()) {
+                 if (c == '*') {
+                if (i == 0) {
+                    postfix += regex.charAt(i);
+                    flag=1;
+                } else if (regex.charAt(i - 1) == '|') {
+                    postfix += regex.charAt(i);
+                    flag=1;
+                }
+            } else if (c == '+') {
+                if (i == 0) {
+                    postfix += regex.charAt(i);
+                    flag=1;
+                } else if (regex.charAt(i - 1) == '|') {
+                    postfix += regex.charAt(i);
+                    flag=1;
+                }
+            }
+                while (!operands.isEmpty()&&flag==0) {
                     character = (Character) operands.peek();
                     if (priority(character) >= priority(regex.charAt(i))) {
                         postfix += (Character) operands.peek();
@@ -93,9 +99,10 @@ public class RegularExpression {
                 }
                 operands.push(regex.charAt(i));
             }
+            flag=0;
         }
         while (!operands.empty()) {
-            postfix += " ";
+           
             postfix += (Character) operands.peek();
             operands.pop();
         }

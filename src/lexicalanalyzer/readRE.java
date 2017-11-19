@@ -10,7 +10,9 @@ public class readRE {
 
     public static HashMap<String, String> RE = new HashMap<>();
     public static HashMap<String, String> RD = new HashMap<>();
-    public static String all = "a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|u|x|y|z|A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|B|K|R|S|T|Y|V|W|X|Y|Z|0|1|2|3|4|5|6|7|8|9";
+    public static HashMap<String, Integer> priority = new HashMap<>();
+    static int priorityId;
+    public static String all = "a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z|0|1|2|3|4|5|6|7|8|9";
 
     public static void read() {
         String fileName = "input.txt";
@@ -36,7 +38,7 @@ public class readRE {
 
                     for (int g = 0; g < arrKeywords.length; g++) {
                         RE.put(arrKeywords[g], arrKeywords[g]);
-
+priority.put(arrKeywords[g], priorityId++);
                     }
 
                 }//end of Keywords
@@ -53,9 +55,11 @@ public class readRE {
                     for (int g = 0; g < arrKeywords.length; g++) {
                         if (arrKeywords[g].charAt(0) == '\\') {
                             RE.put(arrKeywords[g].replace("\\", ""), arrKeywords[g].replace("\\", ""));
+                            priority.put(arrKeywords[g].replace("\\", ""), priorityId++);
                         } else {
 
                             RE.put(arrKeywords[g], arrKeywords[g]);
+                            priority.put(arrKeywords[g], priorityId++);
                         }
 
                     }
@@ -99,7 +103,7 @@ public class readRE {
                         if (linews.charAt(colon - 1) != '\\') {
                             split = linews.split(":");
                             RE.put(split[0], split[1]);
-
+ priority.put(split[0], priorityId++);
                         }
 
                     }//end of experssions
@@ -169,6 +173,7 @@ public class readRE {
             for (String key4 : RE.keySet()) {
                 if (RE.get(key4).contains(key3)) {
                     RE.put(key4, RE.get(key4).replace(key3, "(" + RD.get(key3) + ")"));
+                     priority.put(key4, priorityId++);
                 }
 
             }

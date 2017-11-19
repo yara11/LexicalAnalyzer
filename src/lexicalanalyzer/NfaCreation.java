@@ -17,32 +17,51 @@ public class NfaCreation {
 //
 //    }
     Nfa buildfNfa(String postfix, String expression) {
-
+ int flag=0;
         for (int i = 0; i < postfix.length(); i++) {
             char input = postfix.charAt(i);
             if (isInput(input)) {
                 nfaStack.push(Nfa.AddTransition(input, expression));
-            } else if (input == '*' || input == '+') {
-                if (i == 0) {
-                    nfaStack.push(Nfa.AddTransition(input, expression));
-                } else if (postfix.charAt(i + 1) == ' ') {
-                    nfaStack.push(Nfa.AddTransition(input, expression));
-                }
-            } else if (input == '.') {
+            }  else if (input == '.') {
                 Nfa b = nfaStack.pop();
                 Nfa a = nfaStack.pop();
                 nfaStack.push(Concat(a, b, expression));
             } else if (input == '*') {
+                 
+                if (i == 0) {
+                    nfaStack.push(Nfa.AddTransition(input, expression));
+                    flag=1;
+                } else if (i!=postfix.length()-1) {
+                    if(postfix.charAt(i + 1) == '|'){
+                        flag =1;
+                    nfaStack.push(Nfa.AddTransition(input, expression));}
+                }
+            
+                if(flag==0){
                 Nfa top = nfaStack.pop();
-                nfaStack.push(Kleene(top, expression));
+                nfaStack.push(Kleene(top, expression));}
             } else if (input == '+') {
+               
+                if (i == 0) {
+                    nfaStack.push(Nfa.AddTransition(input, expression));
+                    flag=1;
+                } else if (i!=postfix.length()-1) {
+                    
+                    if(postfix.charAt(i + 1) == '|'){
+                    nfaStack.push(Nfa.AddTransition(input, expression));
+                    flag=1;
+                    }
+                }
+            
+                if(flag==0){
                 Nfa top = nfaStack.pop();
-                nfaStack.push(Plus(top, expression));
+                nfaStack.push(Plus(top, expression));}
             } else if (input == '|') {
                 Nfa b = nfaStack.pop();
                 Nfa a = nfaStack.pop();
                 nfaStack.push(Union(a, b, expression));
-            }
+            }flag=0;
+            
         }
         //a part is added here to get complete nfa
         Nfa completeNfa = nfaStack.pop();
