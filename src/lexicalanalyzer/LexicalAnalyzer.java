@@ -1,5 +1,6 @@
 package lexicalanalyzer;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -7,18 +8,18 @@ import java.util.Set;
 
 public class LexicalAnalyzer {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
       
       readRE.printReadFile(); 
        NfaInput.nfaInput();
       RegularExpression regular = new RegularExpression();
        NfaCreation n = new NfaCreation();
-       System.out.println("priorityyyyyyy");
-       for (String key : readRE.priority.keySet()) {
-            System.out.println("key: " + key + "  and value: " + readRE.priority.get(key));
-
-       }
+//       System.out.println("priorityyyyyyy");
+//       for (String key : readRE.priority.keySet()) {
+//            System.out.println("key: " + key + "  and value: " + readRE.priority.get(key));
+//
+//       }
       for(String Key:readRE.RE.keySet()){
           String expression = readRE.RE.get(Key);
           System.out.println("exp of : "+ Key +" is  "+ expression );
@@ -56,13 +57,13 @@ public class LexicalAnalyzer {
      Dfa.printDfaGraph();
      DFaTable.constructDfaTable();
      DFaTable.printDfaTable();
-    Validation.validate("1235");
-     
-      System.out.println("This is the resut pattern "+Validation.getPriority());
-       System.out.println(Validation.queue_blocks.poll().pattern.get(0));
-       
+//    Validation.validate("sum");
+//     
+//       System.out.println("This is the resut pattern "+Validation.getPriority());
 //       System.out.println(Validation.queue_blocks.poll().pattern.get(0));
-       
+//    
+//       System.out.println(Validation.queue_blocks.poll().pattern.get(0));
+       Tokens.read();
 
 
    

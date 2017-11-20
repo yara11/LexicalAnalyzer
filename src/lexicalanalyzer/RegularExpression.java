@@ -5,6 +5,8 @@ import java.util.Stack;
 public class RegularExpression {
 
     String insert_concat(String regexp) {
+        if(regexp.length()==1)
+            return regexp;
         String ret = "";
         char c, c2;
         for (int i = 0; i < regexp.length(); i++) {
@@ -45,7 +47,8 @@ public class RegularExpression {
         int flag=0;
         Stack operands = new Stack();
         char character;
-
+        if(regex.length()==1)
+            return regex;
         for (int i = 0; i < regex.length(); i++) {
             char c = regex.charAt(i);
             if (Character.isDigit(regex.charAt(i))) {

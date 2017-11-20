@@ -4,64 +4,63 @@ import java.util.Stack;
 
 public class NfaCreation {
 
-    //  int ID = 0;
     Stack<Nfa> nfaStack = new Stack<Nfa>();
 
-    //Split the postfix at each space and insert them into an array of inputs.
-//    public static String[] split_input(String string) {
-//        String[] inputArray = string.split(" ");
-//        if (inputArray.length ==1 ) {
-//            throw new IllegalArgumentException();
-//        }
-//        return inputArray;
-//
-//    }
     Nfa buildfNfa(String postfix, String expression) {
- int flag=0;
+        int flag = 0;     //flag to differentiate between zerp or more operation and the mult operation.
+                          ////flag to differentiate between one or more operation and the addition operation.
         for (int i = 0; i < postfix.length(); i++) {
             char input = postfix.charAt(i);
-            if (isInput(input)) {
+            //for handling brackets
+            if(postfix.length()==1){
+                 nfaStack.push(Nfa.AddTransition(input, expression));
+            }
+           else if (isInput(input)) {
                 nfaStack.push(Nfa.AddTransition(input, expression));
-            }  else if (input == '.') {
+            } else if (input == '.') {
                 Nfa b = nfaStack.pop();
                 Nfa a = nfaStack.pop();
                 nfaStack.push(Concat(a, b, expression));
             } else if (input == '*') {
-                 
+
                 if (i == 0) {
                     nfaStack.push(Nfa.AddTransition(input, expression));
-                    flag=1;
-                } else if (i!=postfix.length()-1) {
-                    if(postfix.charAt(i + 1) == '|'){
-                        flag =1;
-                    nfaStack.push(Nfa.AddTransition(input, expression));}
-                }
-            
-                if(flag==0){
-                Nfa top = nfaStack.pop();
-                nfaStack.push(Kleene(top, expression));}
-            } else if (input == '+') {
-               
-                if (i == 0) {
-                    nfaStack.push(Nfa.AddTransition(input, expression));
-                    flag=1;
-                } else if (i!=postfix.length()-1) {
-                    
-                    if(postfix.charAt(i + 1) == '|'){
-                    nfaStack.push(Nfa.AddTransition(input, expression));
-                    flag=1;
+                    flag = 1;
+                } else if (i != postfix.length() - 1) {
+                    if (postfix.charAt(i + 1) == '|') {
+                        flag = 1;
+                        nfaStack.push(Nfa.AddTransition(input, expression));
                     }
                 }
-            
-                if(flag==0){
-                Nfa top = nfaStack.pop();
-                nfaStack.push(Plus(top, expression));}
+
+                if (flag == 0) {
+                    Nfa top = nfaStack.pop();
+                    nfaStack.push(Kleene(top, expression));
+                }
+            } else if (input == '+') {
+
+                if (i == 0) {
+                    nfaStack.push(Nfa.AddTransition(input, expression));
+                    flag = 1;
+                } else if (i != postfix.length() - 1) {
+
+                    if (postfix.charAt(i + 1) == '|') {
+                        nfaStack.push(Nfa.AddTransition(input, expression));
+                        flag = 1;
+                    }
+                }
+
+                if (flag == 0) {
+                    Nfa top = nfaStack.pop();
+                    nfaStack.push(Plus(top, expression));
+                }
             } else if (input == '|') {
                 Nfa b = nfaStack.pop();
                 Nfa a = nfaStack.pop();
                 nfaStack.push(Union(a, b, expression));
-            }flag=0;
-            
+            }
+            flag = 0;
+
         }
         //a part is added here to get complete nfa
         Nfa completeNfa = nfaStack.pop();

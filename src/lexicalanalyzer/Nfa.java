@@ -8,7 +8,7 @@ public class Nfa {
     public static int last_id = 0;
     private State start = null, end = null;
     //list of ststartates
-   static ArrayList<State> states=new ArrayList<State>();
+    static ArrayList<State> states = new ArrayList<State>();
 
     //
     public Nfa(State start, State end) {
@@ -22,7 +22,7 @@ public class Nfa {
         transitions.add(t);
     }
 
-    public static Nfa AddTransition(char sym,String expression) {
+    public static Nfa AddTransition(char sym, String expression) {
         State start = new State(last_id++, false);
         //
 
@@ -53,10 +53,10 @@ public class Nfa {
     public static void printGraph() {
         for (int i = 0; i < transitions.size(); i++) {
             for (Transition t : transitions.get(i)) {
-                
+
                 System.out.println("(" + i + " -> " + t.getState().getId() + ", " + t.getSymbol() + ")");
-                     System.out.println(t.getState().isIsAccepting());
-                     System.out.println(t.getState().getPattern());
+                System.out.println(t.getState().isIsAccepting());
+                System.out.println(t.getState().getPattern());
             }
         }
     }
