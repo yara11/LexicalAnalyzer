@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import static lexicalanalyzer.Validation.stack_blocks;
 
 /**
@@ -16,6 +17,7 @@ import static lexicalanalyzer.Validation.stack_blocks;
  * @author yomnabarakat
  */
 public class Tokens {
+    static ArrayList<String> acceptedTokens=new ArrayList<String>();
     public static void read() throws FileNotFoundException, IOException {
         String fileName = "tokens.txt";
         String line = null;
@@ -34,10 +36,20 @@ public class Tokens {
      }
     public static void getTokens(String input){
        Validation.validate(input);
-        System.out.println("This is the resut pattern "+Validation.getPriority());
-        Validation.stack_blocks.clear();
-        Validation.queue_blocks.clear();
-        //Validation.
-        
-     }
+       int i=0;
+       while(!Validation.queue_blocks.isEmpty()){
+            System.out.println("This is the pattern:"+Validation.getPriority());
+            acceptedTokens.add(Validation.getPriority());
+            Validation.queue_blocks.poll();
+       }
+    
+     Validation.stack_blocks.clear();
+     Validation.queue_blocks.clear();
+    }
+      static void printOutput(){
+          System.out.println("Output is:");
+          for(String token:acceptedTokens){
+              System.out.println(token);
+          }
+      }
 }

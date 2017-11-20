@@ -64,7 +64,7 @@ public class LexicalAnalyzer {
 //    
 //       System.out.println(Validation.queue_blocks.poll().pattern.get(0));
        Tokens.read();
-
+       Tokens.printOutput();
 
    
   
