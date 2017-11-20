@@ -28,11 +28,7 @@ public class DfaCreation {
             CombinedState c1 = combinedStateList.get(i);
 
            
-//            for (char c : c1.combinedInputs) {
-//
-//                System.out.println("myid" + c1.id + "inputs" + c);
-//
-//            }
+     
 
             for (char input : c1.combinedInputs) {
                
@@ -76,6 +72,7 @@ public class DfaCreation {
        
 
         CombinedState deadState = new CombinedState(combinedId);
+        Dfa.AddDfa();
         combinedStateList.add(deadState);
     }
 

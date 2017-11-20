@@ -55,12 +55,14 @@ public class LexicalAnalyzer {
      System.out.println("\nThis is the DFA:\n");
      Dfa.printDfaGraph();
      DFaTable.constructDfaTable();
-     //DFaTable.printDfaTable();
-    Validation.validate("if");
+     DFaTable.printDfaTable();
+    Validation.validate("1235");
      
       System.out.println("This is the resut pattern "+Validation.getPriority());
+       System.out.println(Validation.queue_blocks.poll().pattern.get(0));
        
-      
+//       System.out.println(Validation.queue_blocks.poll().pattern.get(0));
+       
 
 
    
