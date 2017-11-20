@@ -8,7 +8,7 @@ import java.util.Set;
 public class CombinedState {
 
     int id;
-
+    String parStr = "";
     Set<State> combinedStates;
     ArrayList<String> pattern= new ArrayList<String>();
     boolean isAccepting;

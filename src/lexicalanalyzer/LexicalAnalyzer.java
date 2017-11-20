@@ -54,15 +54,10 @@ public class LexicalAnalyzer {
    
      DfaCreation.createDfa(CombinedNfa.finalStart); 
      System.out.println("\nThis is the DFA:\n");
-     Dfa.printDfaGraph();
+     //Dfa.printDfaGraph();
      DFaTable.constructDfaTable();
      DFaTable.printDfaTable();
-//    Validation.validate("sum");
-//     
-//       System.out.println("This is the resut pattern "+Validation.getPriority());
-//       System.out.println(Validation.queue_blocks.poll().pattern.get(0));
-//    
-//       System.out.println(Validation.queue_blocks.poll().pattern.get(0));
+
        Tokens.read();
        Tokens.printOutput();
 
