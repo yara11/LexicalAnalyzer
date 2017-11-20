@@ -35,8 +35,11 @@ public class Tokens {
      
      }
     public static void getTokens(String input){
-       Validation.validate(input);
-       int i=0;
+         Validation v=new Validation();
+          v.isValid(input);
+           for(int i=0;i<v.lexemes.size();i++){
+             System.out.println("lexeme is:"+v.lexemes.get(i));  
+            Validation.validate(v.lexemes.get(i));
        while(!Validation.queue_blocks.isEmpty()){
             System.out.println("This is the pattern:"+Validation.getPriority());
             acceptedTokens.add(Validation.getPriority());
@@ -45,6 +48,9 @@ public class Tokens {
     
      Validation.stack_blocks.clear();
      Validation.queue_blocks.clear();
+       }
+       
+     
     }
       static void printOutput(){
           System.out.println("Output is:");

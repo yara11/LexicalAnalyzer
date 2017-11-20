@@ -1,6 +1,7 @@
 
 package lexicalanalyzer;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -14,7 +15,36 @@ public class Validation {
 
     static Stack<AcceptingBlocks> stack_blocks = new Stack<AcceptingBlocks>();
     static Queue<CombinedState> queue_blocks = new LinkedList();
+    ArrayList<String> lexemes=new ArrayList<String>();
+//check if character is in input
+    boolean isInput(char c) {
+        if (Character.isAlphabetic(c)) {
+            return true;
+        }
 
+        if (Character.isDigit(c)) {
+            return true;
+        }
+        if (c == '<' || c == '>' || c == '=' || c == '!' || c == '{' || c == '}' || c == 59 || c == 44 || c == '(' || c == ')' || c == '/' || c == '-'||c=='+'||c=='*') {
+            return true;
+        }
+        return false;
+
+    }
+    //check for errors
+     String isValid(String lexeme){
+        char c;
+        for(int i=0;i<lexeme.length();i++){
+            c=lexeme.charAt(i);
+            if(!isInput(c)){
+                lexemes.add(lexeme.substring(0,i));
+                Tokens.acceptedTokens.add(c+"is an invalid token");
+                return isValid(lexeme.substring(i+1, lexeme.length()));
+            } 
+        }
+        lexemes.add(lexeme);
+        return lexeme;
+    }
     //validation function
     static void validate(String lexeme) {
         int end = 0;
