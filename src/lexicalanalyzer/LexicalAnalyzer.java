@@ -1,55 +1,69 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lexicalanalyzer;
 
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
-/**
- *
- * @author User
- */
 public class LexicalAnalyzer {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        RegularExpression regular = new RegularExpression();
-       String postfix= regular.regex_to_postfix("a.b*");
-      System.out.println(postfix);
-      NfaCreation n = new NfaCreation();
-     // String []splitted  =n.split_input(postfix);
-      ///System.out.println(Arrays.toString(splitted));
-      Nfa nfa1=n.buildfNfa(postfix);
-      CombinedNfa.nfas.push(nfa1);
-       System.out.println(nfa1.getStart().getId());
-      Nfa.printGraph();
-      System.out.println();
-      Nfa nfa2 =n.buildfNfa("ab|");
-       CombinedNfa.nfas.push(nfa2);
-      System.out.println(nfa2.getStart().getId());
-      Nfa.printGraph();
-      NfaTable.constructNfaTable();
-      NfaTable.printNfaTable();
+    public static void main(String[] args) throws IOException {
+
       
-     CombinedNfa.CombineNfa();
-     System.out.println(CombinedNfa.finalStart.getId());
-     CombinedNfa.finalStart.setClosures();
-     
-      for(int i=0;i<CombinedNfa.finalStart.getClosures().size();i++){
-          System.out.println(CombinedNfa.finalStart.getClosures().get(i).getId());
+      readRE.printReadFile(); 
+       NfaInput.nfaInput();
+      RegularExpression regular = new RegularExpression();
+       NfaCreation n = new NfaCreation();
+//       System.out.println("priorityyyyyyy");
+//       for (String key : readRE.priority.keySet()) {
+//            System.out.println("key: " + key + "  and value: " + readRE.priority.get(key));
+//
+//       }
+      for(String Key:readRE.RE.keySet()){
+          String expression = readRE.RE.get(Key);
+          System.out.println("exp of : "+ Key +" is  "+ expression );
+          String exWConcat = regular.insert_concat(expression);
+          System.out.println("concat of : "+ Key +" is  "+ exWConcat );
+          String postfix= regular.regex_to_postfix(exWConcat);
+          System.out.println("postfix  of : "+ Key +" is  "+ postfix);
+         
+          Nfa nfa1=n.buildfNfa(postfix,Key);
+          System.out.println("NFA  of : "+ Key +" is done");
+          CombinedNfa.nfas.push(nfa1);
+          System.out.println("push of : "+ Key +" is done");
       }
-      Nfa.printGraph();
-    System.out.println(Nfa.states.get(2).getNextState('b').getId());
-      //check that states arraylist has all states and that state id is equal to index 
-//      System.out.println(Nfa.states.size());
-//      for(int i=0;i<Nfa.states.size();i++){
-//          System.out.println(Nfa.states.get(i).getId());
-//      }
-    }
-    
+      
+       
+        
+     System.out.println("\nThis is the NFA:\n");
+     CombinedNfa.CombineNfa();
+     Nfa.printGraph();
+     System.out.println("combinedNFAStart: "+CombinedNfa.finalStart.getId());
+     
+     // setting inputs and closures for each state in the nfa.
+     for(int i=0;i< Nfa.states.size();i++)
+     {
+         Nfa.states.get(i).setClosures();
+         Nfa.states.get(i).setInputs();
+     }
+
+     
+     NfaTable.constructNfaTable();
+     //NfaTable.printNfaTable();
+   
+     DfaCreation.createDfa(CombinedNfa.finalStart); 
+     System.out.println("\nThis is the DFA:\n");
+     //Dfa.printDfaGraph();
+     DFaTable.constructDfaTable();
+     DFaTable.printDfaTable();
+
+       Tokens.read();
+       Tokens.printOutput();
+
+   
+  
+     
+   }
+
 }
